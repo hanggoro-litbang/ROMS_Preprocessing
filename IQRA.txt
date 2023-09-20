@@ -2,7 +2,7 @@
 
 Berikut adalah langkah-langkah yang dalam pre-processing data input ROMS. 
 Jika ada yang kurang jelas atau ada yang ingin ditanyakan atau menyampaikan kritik dan masukan
-bisa langsung tulis di issues atau kontak ke muhammad.rahman@bmkg.go.id ya :)
+bisa langsung tulis di issues :)
 
 ## Happy Modeling ##
 
@@ -20,6 +20,14 @@ bisa langsung tulis di issues atau kontak ke muhammad.rahman@bmkg.go.id ya :)
 	The ETOPO Global Relief Model integrates topography, bathymetry, and shoreline data from regional and global datasets
 	dapat di download dimari >> https://www.ncei.noaa.gov/maps/grid-extract/
 
+	* data yang digunakan harus dalam format .nc ;  jika tidak, harus dikonversi dulu ke format .nc 
+	* data batimetri dapat diakses:
+		/mnt-storage1/TRAINING/script/matlab/ROMS/1_batimetri
+	* untuk unduh data dari server ke local
+	  pada mobaxterm, buka terminal local, lalu pindah ke direktori untuk menyimpan data batimetri
+		cd /mnt/c/Arief/ROMS/Modul_COAWST/ROMS/1_batimetri
+		scp -P 2022 coawst@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROMS/1_batimetri/* .
+
 2) Grid
 
 	a. GridBuilder
@@ -28,6 +36,48 @@ bisa langsung tulis di issues atau kontak ke muhammad.rahman@bmkg.go.id ya :)
 
 	b. generate_grid.m
 	membuat grid domain roms dengan script (By Haibo Zong, Fathom Science)
+	* untuk unduh data dari server ke local
+		cd /mnt/c/Arief/ROMS/Modul_COAWST/ROMS/2_grid/b_generate_grid_m
+		scp -P 2022 coawst@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROMS/2_grid/b_generate_grid_m/* .
+
+	* buka matlab > generate_grid.m
+		
+		%% ========= bagian yang diubah ========= (1)
+		% set range of lon and lat
+		% contoh case selat sunda
+		% domain 1 100.814 110.418 | -1.1108 -10.6522   > 101 110     | -1.5 -10
+		% domain 2 102.171 108.980 | -2.87296 -8.91458  > 102.5 108.5 | -3 -8.5
+		% domain 3 104.115 106.737 | -4.86671 -7.20458  > 104.5 106.5 | -5 -7
+		lonl = 101.; % west 
+		lonr = 110.; % east
+		latd = -10.; % south
+		latu = -1.5; % north
+		%% =======================================
+
+		%% ========= bagian yang diubah ========= (2)
+		% resolusi model (dx=dy)
+		resolusi = 9; %(dalam km)
+		itv = resolusi/radius; %resolusi
+		%% =======================================		
+
+		%% ========= bagian yang diubah ========= (3)
+		% input file batimetri 
+		gebcofn = '../../1_batimetri/indonesia_gebco_15arc.nc';
+		%gebcofn = '../1_batimetri/indonesia_etopo_15arc.nc';
+		%% =======================================
+
+		%% ========= bagian yang diubah ========= (4)
+		h(h > 5000) = 5000; % 5000m cut-off depth (penentuan titik terdalam)
+		%% =======================================
+
+		%% ========= bagian yang diubah ========= (5)
+		ARVD.N=20; % jumlah layer kedalaman 
+		%% =======================================
+
+		%% ========= bagian yang diubah ========= (6)
+		save sunda_9km_gebco_grid.mat rho
+		mat2roms_rps('sunda_9km_gebco_grid.mat','sunda_9km_gebco_grid.nc')
+		%% =======================================
 
 3) ICBC
 
@@ -35,6 +85,44 @@ bisa langsung tulis di issues atau kontak ke muhammad.rahman@bmkg.go.id ya :)
 	membuat file initial, boundary dan climatology untuk roms menggunakan data HYCOM 
 	script yang digunakan >> roms_master_climatology_coawst_mw.m (by JC Warner)
 	source utamanya bisa download disini >> https://github.com/DOI-USGS/COAWST 
+
+	* data dan script dapat diakses:
+		cd /mnt-storage1/TRAINING/script/matlab/ROMS/3_ICBC/a_hycom
+		scp -P 2022 coawst@182.16.251.41:/mnt storage1/TRAINING/script/matlab/ROMS/3_ICBC/a_hycom/roms_master_climatology_coawst_mw_sip.m .
+
+	* buka matlab > roms_master_climatology_coawst_mw_sip.m
+
+		%% ========= bagian yang diubah ========= (1)
+		
+		% (1) Enter start date (T1) and number of days to get climatology data 
+		T1 = datenum(2023,09,9,12,0,0); %start date
+		%number of days and frequency to create climatology files for
+		numdays = 3;
+		dayFrequency = 1;
+		
+		% (2) Enter URL of the HYCOM catalog for the requested time, T1
+		% see http://tds.hycom.org/thredds/catalog.html
+		url = 'https://tds.hycom.org/thredds/dodsC/GLBy0.08/expt_93.0'; 
+		
+		% (4) Enter grid vertical coordinate parameters --These need to be consistent with the ROMS setup. 
+		theta_s     =  5.0;
+		theta_b     =  0.4;
+		Tcline      = 200.0;
+		N           = 20;
+		Vtransform  =  2;
+		Vstretching =  4;
+		%% =======================================
+
+		%% ========= bagian yang diubah ========= (2)
+		% buat direktori kerja
+		if ~exist('grid_9km', 'dir')
+		  mkdir('grid_9km');
+		end
+		cd('C:\Arief\ROMS\Modul_COAWST\ROMS\3_ICBC\a_hycom\grid_9km');
+		wdr = pwd;
+		% (3) Enter path and name of the ROMS grid
+		modelgrid = '../../../2_grid/b_generate_grid_m/sunda_9km_gebco_grid.nc';
+		%% =======================================
 
 	b. Mercator
 	membuat file initial, boundary dan climatology untuk roms menggunakan data Mercator
