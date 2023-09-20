@@ -274,10 +274,10 @@ bisa langsung tulis di issues :)
      		96            N == 20            ! Number of vertical levels
 		109       NtileI == 2                               ! I-direction partition
 		110       NtileJ == 2                               ! J-direction partition
-    		224       NTIMES == 9600                               ! ntimes = hari simulasi * 24 * 60 * 60 / dt
-    		225           DT == 27.0d0
-    		262         NHIS == 133        ! 3600  ! inteval data yang jadi output misal mau per jam maka 1jam/dt
-    		263      NDEFHIS == 3200      ! 86400 ! jumllah file per nc tiap berapa waktu misal mau nc per hari nhis*24
+    		224       NTIMES == 4320                               ! ntimes = hari simulasi * 24 * 60 * 60 / dt
+    		225           DT == 60.0d0
+    		262         NHIS == 60        ! 3600  ! inteval data yang jadi output misal mau per jam maka 1jam/dt
+    		263      NDEFHIS == 1440      ! 86400 ! jumllah file per nc tiap berapa waktu misal mau nc per hari nhis*24
 		399   Vtransform == 2                          ! transformation equation
     		400  Vstretching == 4                          ! stretching function
     		404      THETA_S == 5.0d0                      ! surface stretching parameter
