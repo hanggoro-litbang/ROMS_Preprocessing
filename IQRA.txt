@@ -135,6 +135,8 @@ bisa langsung tulis di issues :)
 	https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=form
 	script yang digunakan adalah >> era5_2_roms.m karya Hernan G. Arango & J. Wilkin; edited by by Haibo Zong
 
+	* data dan script dapat diakses:
+
 	b. GFS
 
 	c. FNL
