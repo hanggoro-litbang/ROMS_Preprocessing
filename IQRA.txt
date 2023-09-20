@@ -301,6 +301,28 @@ bisa langsung tulis di issues :)
 	* compile coawst.bash
 		script build.log
 		./coawst.bash -j 10
+		>> akan menghasilkan coawstM
+
+	* edit run_roms
+		vi run_roms
+     		 1 #!/bin/bash
+     		 2
+      		3 #SBATCH -J roms_only               # Job name
+      		4 #SBATCH -o roms_sunda.log         # Name of stdout output file (%j expands to jobId)
+      		5 #SBATCH -N 1                  # Total number of nodes requested
+     		6 #SBATCH -n 4                # Total number of mpi tasks requested
+      		7 #SBATCH -t 24:00:00           # Run time (hh:mm:ss) - 1.5 hours
+      		8 #SBATCH -p normal             # Partition name
+      		9
+     		10 # Launch MPI-based executable
+     		11 mpirun ./coawstM roms_sunda.in > roms_sunda.out
+
+	* run roms
+		sbatch run_roms
+		tail -f roms_sunda.out
+
+
+		
 
 
 
