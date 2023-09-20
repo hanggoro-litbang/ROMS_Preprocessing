@@ -181,7 +181,25 @@ bisa langsung tulis di issues :)
 	source bisa dilihat di website
 	https://www.ncei.noaa.gov/thredds/catalog.html		>> GFS 0.5 deg data from NCEI NOAA
 	https://nomads.ncep.noaa.gov/				>> GFS 0.25 deg data from NOMADS NCEP
+
+	* data dan script dapat diakses:
+		cd /mnt-storage1/TRAINING/script/matlab/ROMS/4_surface_forcing/b_gfs
+		scp -P 2022 coawst@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROMS/4_surface_forcing/b_gfs/* .
+
+	* buka matlab > ncei_2roms2_sip.m
+
+	%% ===================== bagian yang diubah ============================== (1)
 	
+	% (3) Enter start and end dates
+	time_start = datenum('9-Sep-2023'); tst = datestr(time_start,'yyyymmdd');
+	time_end   = datenum('12-Sep-2023'); ten = datestr(time_end,'yyyymmdd');
+	
+	% pilih GFS analisis (1) atau GFS forecast (2)
+	GFS = 2;
+
+	% path grid roms (3)
+	model_grid = '../../2_grid/b_generate_grid_m/sunda_9km_gebco_grid.nc';
+	% =========================================================================
 
 
 5) Tidal Forcing
@@ -190,6 +208,22 @@ bisa langsung tulis di issues :)
 	membuat file tidal forcing menggunakan dataset TPX09
 	script yang digunakan >> create_tidal_forcing_TPXO91 (created by Haibo Zong)
 
+	* data dan script dapat diakses:
+		cd /mnt-storage1/TRAINING/script/matlab/ROMS/5_tide/a_tpx09
+		scp -P 2022 coawst@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROMS/5_tide/a_tpx09/* .
+
+	* buka matlab > create_tidal_forcing_TPXO91_sip.m
+
+		%% ========= bagian yang diubah ========= (1)
+		% nama file output yang diinginkan dalam format nc		
+		tidefn = 'roms9km_tides.nc';
+		% path lokasi file grid roms
+		grdfn = '../../2_grid/b_generate_grid_m/sunda_9km_gebco_grid.nc'; 
+		% datenum(yyyy,mm,dd) - first day julian day tidak diubah harus konsisten dengan file/settingan lainnya
+		base_date = datenum(1858,11,17);
+		% datenum(yyyy,mm,dd) - the nodal corrections reference time (usually the midpoint of range of the prediction time or mid-month of the simulation time)
+		pred_date = datenum(2023,9,15); 
+		%% =======================================
 	
 	b. TPX08
 	membuat file tidal forcing menggunakan dataset TPX08
