@@ -136,10 +136,53 @@ bisa langsung tulis di issues :)
 	script yang digunakan adalah >> era5_2_roms.m karya Hernan G. Arango & J. Wilkin; edited by by Haibo Zong
 
 	* data dan script dapat diakses:
+		cd /mnt-storage1/TRAINING/script/matlab/ROMS/4_surface_forcing/a_era5
+		scp -rP 2022 coawst@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROMS/4_surface_forcing/a_era5/* .
+
+	* buka matlab > era5_2_roms_sip.m.m
+
+		%% ========= bagian yang diubah ========= (1)
+		% Base date for ROMS forcing files: "days since 2000-01-01 00:00:00".
+		% harus konsisten dengan ddate yang digunakan pada saat menghitung kompunen
+		% pasut dan saat mengedit file roms.in
+		mybasedate = datenum(1858,11,17,0,0,0);
+		%% =======================================	
+
+		%% ========= bagian yang diubah ========= (2)
+		% Set field element in structure F to process.
+		doFields = [5 6 7 9 13 14 15 16]; % If the ROMS option BULK_FLUXES is ACTIVATED, process elements 5:16
+		                                  % swrad Uwind Vwind lwrad_down rain Pair Tair Qair    
+		%doFields = [1 2 3 4 5];          % If the ROMS option BULK_FLUXES is NOT activatived, process elements 1:5
+		                                  % sustr svstr shflux swflux swrad
+		%% =======================================
+
+		%% ========= bagian yang diubah ========= (3)
+		% batas lan lot data era5 yang digunakan
+		spherical = true;                       % Spherical switch
+		LonMin    = 89;                     % GOM left-bottom longitude
+		LonMax    = 146;                      % GOM right-top   longitude
+		LatMin    = -16;                       % GOM left-bottom latitude
+		LatMax    = 16;                       % GOM right-top   latitude
+		FlipLat   = true;                       % Flip data in ERA NetCDF files
+		%% =======================================
+
+		%% ========= bagian yang diubah ========= (4)                                        
+		StrDay    = datenum('01-Sep-2023');     % tanggal awal data era5
+		EndDay    = datenum('13-Sep-2023');     % tanggal akhir data era5
+		%% =======================================
+
+		%% ========= bagian yang diubah ========= (5) 
+		% nama file era5
+		InpFile  = fullfile(Dir, 'sunda_era5_sept_2023.nc');
+		%% =======================================
 
 	b. GFS
+	membuat file surface forcing dari dataset GFS.
+	source bisa dilihat di website
+	https://www.ncei.noaa.gov/thredds/catalog.html		>> GFS 0.5 deg data from NCEI NOAA
+	https://nomads.ncep.noaa.gov/				>> GFS 0.25 deg data from NOMADS NCEP
+	
 
-	c. FNL
 
 5) Tidal Forcing
 	
