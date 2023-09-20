@@ -230,3 +230,87 @@ bisa langsung tulis di issues :)
 	
 
 	%% ============================= End Of File =========================================== %%
+
+
+
+6) Editing script: build_roms.sh / coawst.bash
+
+	* lokasi home directory, buat direktori baru untuk project sunda
+		/home/tr29/COAWST
+		cd Projects
+		mkdir sunda
+		cd sunda
+	* copy file bash dari root lalu edit
+		cp /home/tr29/COAWST/coawst.bash .
+		vi coawst.bash
+		:set number
+
+		++++++++++++++++++++++++++++++++++++++++++
+		124 export   COAWST_APPLICATION=ROMS_SUNDA
+		132 export   MY_ROOT_DIR=/home/tr29/COAWST
+		133 export   MY_PROJECT_DIR=/home/tr29/COAWST/Projects/sunda
+		458 export   MY_HEADER_DIR=${MY_PROJECT_DIR}
+    		459 export   MY_ANALYTICAL_DIR=${MY_PROJECT_DIR}
+		++++++++++++++++++++++++++++++++++++++++++
+
+	* copy file input roms dari /mnt-storage1/TRAINING/script/matlab/ROMS
+		cp /mnt-storage1/TRAINING/script/matlab/ROMS/2_grid/b_generate_grid_m/sunda_9km_gebco_grid.nc .
+		cp /mnt-storage1/TRAINING/script/matlab/ROMS/3_ICBC/a_hycom/grid_9km/roms_9km* .
+		cp /mnt-storage1/TRAINING/script/matlab/ROMS/4_surface_forcing/b_gfs/roms_GFS_sunda_20230909_anl.nc .
+		cp /mnt-storage1/TRAINING/script/matlab/ROMS/5_tide/a_tpx09/roms9km_tides.nc .
+		cp /mnt-storage1/TRAINING/script/matlab/ROMS/roms_sunda.h .
+		cp /mnt-storage1/TRAINING/script/matlab/ROMS/roms_sunda.in .
+
+	* edit file roms_sunda.in .
+		# chown coawst:training roms_sunda.in
+		vi roms_sunda.in
+		:set number
+
+		67        TITLE = ROMS STANDALONE - SUNDA
+		71     MyAppCPP = ROMS_SUNDA
+     		94           Lm == 105            ! Number of I-direction INTERIOR RHO-points xi_rho-2
+     		95           Mm == 111            ! Number of J-direction INTERIOR RHO-points eta_rho-2
+     		96            N == 20            ! Number of vertical levels
+		109       NtileI == 2                               ! I-direction partition
+		110       NtileJ == 2                               ! J-direction partition
+    		224       NTIMES == 9600                               ! ntimes = hari simulasi * 24 * 60 * 60 / dt
+    		225           DT == 27.0d0
+    		262         NHIS == 133        ! 3600  ! inteval data yang jadi output misal mau per jam maka 1jam/dt
+    		263      NDEFHIS == 3200      ! 86400 ! jumllah file per nc tiap berapa waktu misal mau nc per hari nhis*24
+		399   Vtransform == 2                          ! transformation equation
+    		400  Vstretching == 4                          ! stretching function
+    		404      THETA_S == 5.0d0                      ! surface stretching parameter
+    		405      THETA_B == 0.4d0                      ! bottom  stretching parameter
+    		406       TCLINE == 50.0d0                     ! critical depth (m)
+    		422       DSTART =  60196.5d0                      ! days
+    		423   TIDE_START =  60196.5d0                      ! days
+    		424     TIME_REF =  18581117.0d0                 ! yyyymmdd.dd
+    		963      GRDNAME == /home/tr29/COAWST/Projects/sunda/sunda_9km_gebco_grid.nc
+    		964      ININAME == /home/tr29/COAWST/Projects/sunda/roms_9km_ini.nc
+    		963      GRDNAME == /home/tr29/COAWST/Projects/sunda/sunda_9km_gebco_grid.nc
+    		964      ININAME == /home/tr29/COAWST/Projects/sunda/roms_9km_ini.nc
+		1006      BRYNAME == /home/tr29/COAWST/Projects/sunda/roms_9km_bdy.nc
+		1030     TIDENAME == /home/tr29/COAWST/Projects/sunda/roms_tides.nc
+		1052      FRCNAME == /home/tr29/COAWST/Projects/sunda/roms_GFS_sunda_20230909_anl.nc         
+   		1058      RSTNAME == roms_sunda_rst.nc
+   		1059      HISNAME == roms_sunda_his.nc
+   		1064      AVGNAME == roms_sunda_avg.nc
+   		1066      DIANAME == roms_sunda_dia.nc
+
+	* compile coawst.bash
+		script build.log
+		./coawst.bash -j 10
+
+
+
+
+# error
+ REGRID - input gridded data does not contain model grid:
+
+          Gridded:  LonMin =  108.0000 LonMax =  112.0000
+                    LatMin =  -11.5000 LatMax =   -0.5000
+          Model:    LonMin =  101.0000 LonMax =  110.0727
+                    LatMin =  -10.0000 LatMax =   -1.4643
+ Found Error: 04   Line: 269      Source: ROMS/Utility/get_2dfld.F
+
+		
