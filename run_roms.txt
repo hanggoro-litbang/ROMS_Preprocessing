@@ -391,7 +391,7 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 		vi swan_sunda.in
 
 	* edit file coupling_sunda.h
-		cp /mnt-storage1/TRAINING/script/matlab/sunda.h coupling_sunda.h
+		cp -f /mnt-storage1/TRAINING/script/matlab/sunda.h coupling_sunda.h
 		vi coupling_sunda.h
 	* edit file run_coawst
 		vi run_coawst
