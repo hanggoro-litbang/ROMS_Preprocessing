@@ -397,6 +397,17 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 		vi run_coawst
 
 	* compile coawst.bash
+		export NETCDF=/opt/ohpc/pub/apps/netcdf-4.7.3
+		export WRF_EM_CORE=1
+		export NETCDF4=1
+		export HDF5=/opt/ohpc/pub/apps/hdf5-1.10.4
+		export jasper=/opt/ohpc/pub/apps/jasper-1.900.1
+		export JASPERLIB=/opt/ohpc/pub/apps/jasper-1.900.1/lib
+		export JASPERINC=/opt/ohpc/pub/apps/jasper-1.900.1/include
+		export WRF_DA_CORE=0
+		export WRFIO_NCD_LARGE_FILE_SUPPORT=1
+		export MCT_INCDIR=${HOME}/COAWST/MCT-LIB/include
+		export MCT_LIBDIR=${HOME}/COAWST/MCT-LIB/lib
 		script build.log
 		./coawst.bash -j 10
 		>> akan menghasilkan coawstM
