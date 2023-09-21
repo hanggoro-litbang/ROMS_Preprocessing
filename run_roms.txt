@@ -413,7 +413,7 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 		>> akan menghasilkan coawstM
 
 	
-
+		cp -f /mnt-storage1/TRAINING/script/matlab/WRF/wrflowinp_d01 .
 
 
 
