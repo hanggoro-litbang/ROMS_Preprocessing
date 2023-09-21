@@ -303,12 +303,14 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 	* compile coawst.bash
 		script build.log
 		./coawst.bash -j 10
-		>> akan menghasilkan coawstM
+		>> akan menghasilkan coawstM di /home/tr29/COAWST
+		>> lalu copy file coawstM ke /home/tr29/COAWST/Projects/sunda
+		cp coawstM /home/tr29/COAWST/Projects/sunda
 
-	* edit run_roms
+	* membuat run_roms
 		vi run_roms
-     		 1 #!/bin/bash
-     		 2
+     		1 #!/bin/bash
+     		2
       		3 #SBATCH -J roms_only               # Job name
       		4 #SBATCH -o roms_sunda.log         # Name of stdout output file (%j expands to jobId)
       		5 #SBATCH -N 1                  # Total number of nodes requested
