@@ -28,6 +28,8 @@ bisa langsung tulis di issues :)
 		cd /mnt/c/Arief/ROMS/Modul_COAWST/ROMS/1_batimetri
 		scp -P 2022 coawst@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROMS/1_batimetri/* .
 
+scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROMS/* .
+
 2) Grid
 
 	a. GridBuilder
