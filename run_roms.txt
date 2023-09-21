@@ -294,10 +294,10 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 		1006      BRYNAME == /home/tr29/COAWST/Projects/sunda/roms_9km_bdy.nc
 		1030     TIDENAME == /home/tr29/COAWST/Projects/sunda/roms9km_tides.nc
 		1052      FRCNAME == /home/tr29/COAWST/Projects/sunda/roms_GFS_sunda_20230909_anl.nc         
-   		1058      RSTNAME == roms_sunda_rst.nc
-   		1059      HISNAME == roms_sunda_his.nc
-   		1064      AVGNAME == roms_sunda_avg.nc
-   		1066      DIANAME == roms_sunda_dia.nc
+   		1072      RSTNAME == roms_sunda_rst.nc
+   		1073      HISNAME == roms_sunda_his.nc
+   		1078      AVGNAME == roms_sunda_avg.nc
+   		1080      DIANAME == roms_sunda_dia.nc
 
 	* compile coawst.bash
 		script build.log
@@ -305,6 +305,7 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 		>> akan menghasilkan coawstM di /home/tr29/COAWST
 		>> lalu copy file coawstM ke /home/tr29/COAWST/Projects/sunda
 		cp coawstM /home/tr29/COAWST/Projects/sunda
+		cp ../../coawstM .
 
 	* membuat run_roms
 		vi run_roms
