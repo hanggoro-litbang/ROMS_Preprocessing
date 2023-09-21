@@ -374,19 +374,21 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 		ln -sf ../../WRF/run/*.TBL .
 
 	* edit file coawst.bash
-		cp cp ../sunda/coawst.bash .
+		cp ../sunda/coawst.bash .
 		vi coawst.bash
 
 	* edit file coupling_sunda.in
 		cp /mnt-storage1/TRAINING/script/matlab/coupling_karimun.in coupling_sunda.in
 
 	* edit file edit file roms_sunda.in
+		cd ../roms_sunda.in .
 		
-
 	* edit file swan_sunda.in 
 		cp /mnt-storage1/TRAINING/script/matlab/swan_karimun_ref9km.in swan_sunda.in
+
 	* edit file coupling_sunda.h
-		cp /mnt-storage1/TRAINING/script/matlab/karimun_2nest.h coupling_sunda.h
+		cp /mnt-storage1/TRAINING/script/matlab/sunda.h coupling_sunda.h
+
 	* edit file run_coawst
 
 	* compile coawst.bash
