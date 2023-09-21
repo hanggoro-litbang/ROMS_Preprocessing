@@ -336,9 +336,10 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 	* copy data roms dan swan
 		cp /mnt-storage1/TRAINING/script/matlab/ROMS/2_grid/b_generate_grid_m/sunda_9km_gebco_grid.nc .
 		cp /mnt-storage1/TRAINING/script/matlab/ROMS/3_ICBC/a_hycom/grid_9km/roms_9km* .
-		cp /mnt-storage1/TRAINING/script/matlab/ROMS/4_surface_forcing/b_gfs/roms_GFS_sunda_20230909_anl.nc .			cp /mnt-storage1/TRAINING/script/matlab/ROMS/5_tide/a_tpx09/roms9km_tides.nc .
-		cp /mnt-storage1/TRAINING/script/matlab/SWAN/swan* .
-		cp /mnt-storage1/TRAINING/script/matlab/WRF/* .
+		cp /mnt-storage1/TRAINING/script/matlab/ROMS/4_surface_forcing/b_gfs/roms_GFS_sunda_20230909_anl.nc .		
+		cp /mnt-storage1/TRAINING/script/matlab/ROMS/5_tide/a_tpx09/roms9km_tides.nc .
+		cp -f /mnt-storage1/TRAINING/script/matlab/SWAN/swan* .
+		cp -f /mnt-storage1/TRAINING/script/matlab/WRF/* .
 
 	* buat file scrip_sunda_couple.in dan edit (/home/tr29/COAWST/Lib/SCRIP_COAWST)
 		cd /home/tr29/COAWST/Lib/SCRIP_COAWST
