@@ -1,4 +1,4 @@
-%% ========================================= Start ============================================ %%
+%% ========================================= Pre-Processing ============================================ %%
 
 Berikut adalah langkah-langkah yang dalam pre-processing data input ROMS. 
 Jika ada yang kurang jelas atau ada yang ingin ditanyakan atau menyampaikan kritik dan masukan
@@ -229,9 +229,9 @@ bisa langsung tulis di issues :)
 	membuat file tidal forcing menggunakan dataset TPX08
 	
 
-	%% ============================= End Of File =========================================== %%
 
 
+%% ========================================= ROMS Script ============================================ %%
 
 6) Editing script: build_roms.sh / coawst.bash
 
@@ -317,16 +317,67 @@ bisa langsung tulis di issues :)
      		10 # Launch MPI-based executable
      		11 mpirun ./coawstM roms_sunda.in > roms_sunda.out
 
-	* run roms
+	* submit job run_roms
 		sbatch run_roms
 		tail -f roms_sunda.out
 
+
+		
+%% ========================================= COAWST Script ============================================ %%
+
+	* buat direktori baru
+		mkdir sunda_couple
+		cd sunda_couple
+
+	* copy data roms dan swan
+		cp /mnt-storage1/TRAINING/script/matlab/ROMS/2_grid/b_generate_grid_m/sunda_9km_gebco_grid.nc .
+		cp /mnt-storage1/TRAINING/script/matlab/ROMS/3_ICBC/a_hycom/grid_9km/roms_9km* .
+		cp /mnt-storage1/TRAINING/script/matlab/ROMS/4_surface_forcing/b_gfs/roms_GFS_sunda_20230909_anl.nc .			cp /mnt-storage1/TRAINING/script/matlab/ROMS/5_tide/a_tpx09/roms9km_tides.nc .
+		cp /mnt-storage1/TRAINING/script/matlab/SWAN/swan* .
+		cp /mnt-storage1/TRAINING/script/matlab/WRF/* .
+
+	* buat file scrip_sunda_couple.in dan edit (/home/tr29/COAWST/Lib/SCRIP_COAWST)
+		cd /home/tr29/COAWST/Lib/SCRIP_COAWST
+		cp scrip_coawst_sandy.in scrip_sunda_couple.in
+		
+		vi scrip_sunda_couple.in
+		11 OUTPUT_NCFILE='/home/tr29/COAWST/Projects/sunda_couple/scrip_sunda_static.nc'
+	     	16 NGRIDS_ROMS=1,
+	     	17 NGRIDS_SWAN=1,
+	     	18 NGRIDS_WW3=0,
+	     	19 NGRIDS_WRF=1,
+	     	20 NGRIDS_HYD=0,
+     		24 ROMS_GRIDS(1)='/home/tr29/COAWST/Projects/sunda_couple/sunda_9km_gebco_grid.nc',
+     		25 !ROMS_GRIDS(2)='../../Projects/Sandy/Sandy_roms_grid_ref3.nc',
+     		33 SWAN_COORD(1)='/home/tr29/COAWST/Projects/sunda_couple/swan_9km.grd',
+     		34 !SWAN_COORD(2)='../../Projects/Sandy/Sandy_swan_coord_ref3.grd',
+     		35 SWAN_BATH(1)='/home/tr29/COAWST/Projects/sunda_couple/swan_9km.bot',
+     		36 !SWAN_BATH(2)='../../Projects/Sandy/Sandy_swan_bathy_ref3.bot',
+     		37 SWAN_NUMX(1)=107,
+     		38 !SWAN_NUMX(2)=116,
+     		39 SWAN_NUMY(1)=112,
+     		40 !SWAN_NUMY(2)=86,
+     		58 WRF_GRIDS(1)='/home/tr29/COAWST/Projects/sunda_couple/wrfinput_d01',
+     		59 !WRF_GRIDS(2)='../../Projects/Sandy/wrfinput_d02',
+
+	* compile scrip_sunda_couple.in
+		./scrip_coawst scrip_sunda_couple.in
+
+	* link file WRF
+		cd ../../Projects/sunda_couple
+		ln -sf ../../WRF/run/RRTM* .
+		ln -sf ../../WRF/run/ozone* .
+		ln -sf ../../WRF/run/*.TBL .
 
 		
 
 
 
 
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # error
  REGRID - input gridded data does not contain model grid:
 
