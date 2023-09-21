@@ -271,6 +271,7 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 
 		67        TITLE = ROMS STANDALONE - SUNDA
 		71     MyAppCPP = ROMS_SUNDA
+		76      VARNAME = /home/tr29/COAWST/ROMS/External/varinfo.dat
      		94           Lm == 111            ! Number of I-direction INTERIOR RHO-points xi_rho-2
      		95           Mm == 105            ! Number of J-direction INTERIOR RHO-points eta_rho-2
      		96            N == 20            ! Number of vertical levels
