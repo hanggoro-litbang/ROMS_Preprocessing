@@ -385,8 +385,9 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 	* edit file edit file roms_sunda.in
 		cp ../roms_sunda.in .
 		vi roms_sunda.in
+
 	* edit file swan_sunda.in 
-		cp /mnt-storage1/TRAINING/script/matlab/swan_karimun_ref9km.in swan_sunda.in
+		cp -f /mnt-storage1/TRAINING/script/matlab/swan_karimun_ref9km.in swan_sunda.in
 		vi swan_sunda.in
 
 	* edit file coupling_sunda.h
