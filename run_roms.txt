@@ -290,8 +290,6 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
     		424     TIME_REF =  18581117.0d0                 ! yyyymmdd.dd
     		963      GRDNAME == /home/tr29/COAWST/Projects/sunda/sunda_9km_gebco_grid.nc
     		964      ININAME == /home/tr29/COAWST/Projects/sunda/roms_9km_ini.nc
-    		963      GRDNAME == /home/tr29/COAWST/Projects/sunda/sunda_9km_gebco_grid.nc
-    		964      ININAME == /home/tr29/COAWST/Projects/sunda/roms_9km_ini.nc
 		1006      BRYNAME == /home/tr29/COAWST/Projects/sunda/roms_9km_bdy.nc
 		1030     TIDENAME == /home/tr29/COAWST/Projects/sunda/roms_tides.nc
 		1052      FRCNAME == /home/tr29/COAWST/Projects/sunda/roms_GFS_sunda_20230909_anl.nc         
