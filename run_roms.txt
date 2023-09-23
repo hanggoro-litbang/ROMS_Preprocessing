@@ -26,9 +26,9 @@ bisa langsung tulis di issues :)
 	* untuk unduh data dari server ke local
 	  pada mobaxterm, buka terminal local, lalu pindah ke direktori untuk menyimpan data batimetri
 		cd /mnt/c/Arief/ROMS/Modul_COAWST/ROMS/1_batimetri
-		scp -P 2022 coawst@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROMS/1_batimetri/* .
+		scp -P xxxx coawst@xxx.xx.xxx.xx:/mnt-storage1/TRAINING/script/matlab/ROMS/1_batimetri/* .
 
-scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROMS/* .
+scp -r -P xxxx {username}@xxx.xx.xxx.xx:/mnt-storage1/TRAINING/script/matlab/ROMS/* .
 
 2) Grid
 
@@ -40,7 +40,7 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 	membuat grid domain roms dengan script (By Haibo Zong, Fathom Science)
 	* untuk unduh data dari server ke local
 		cd /mnt/c/Arief/ROMS/Modul_COAWST/ROMS/2_grid/b_generate_grid_m
-		scp -P 2022 coawst@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROMS/2_grid/b_generate_grid_m/* .
+		scp -P xxxx coawst@xxx.xx.xxx.xx:/mnt-storage1/TRAINING/script/matlab/ROMS/2_grid/b_generate_grid_m/* .
 
 	* buka matlab > generate_grid.m
 		
@@ -90,7 +90,7 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 
 	* data dan script dapat diakses:
 		cd /mnt-storage1/TRAINING/script/matlab/ROMS/3_ICBC/a_hycom
-		scp -P 2022 coawst@182.16.251.41:/mnt storage1/TRAINING/script/matlab/ROMS/3_ICBC/a_hycom/roms_master_climatology_coawst_mw_sip.m .
+		scp -P xxxx coawst@xxx.xx.xxx.xx:/mnt storage1/TRAINING/script/matlab/ROMS/3_ICBC/a_hycom/roms_master_climatology_coawst_mw_sip.m .
 
 	* buka matlab > roms_master_climatology_coawst_mw_sip.m
 
@@ -139,7 +139,7 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 
 	* data dan script dapat diakses:
 		cd /mnt-storage1/TRAINING/script/matlab/ROMS/4_surface_forcing/a_era5
-		scp -rP 2022 coawst@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROMS/4_surface_forcing/a_era5/* .
+		scp -r -P xxxx coawst@xxx.xx.xxx.xx:/mnt-storage1/TRAINING/script/matlab/ROMS/4_surface_forcing/a_era5/* .
 
 	* buka matlab > era5_2_roms_sip.m.m
 
@@ -186,7 +186,7 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 
 	* data dan script dapat diakses:
 		cd /mnt-storage1/TRAINING/script/matlab/ROMS/4_surface_forcing/b_gfs
-		scp -P 2022 coawst@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROMS/4_surface_forcing/b_gfs/* .
+		scp -P xxxx coawst@xxx.xx.xxx.xx:/mnt-storage1/TRAINING/script/matlab/ROMS/4_surface_forcing/b_gfs/* .
 
 	* buka matlab > ncei_2roms2_sip.m
 
@@ -212,7 +212,7 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 
 	* data dan script dapat diakses:
 		cd /mnt-storage1/TRAINING/script/matlab/ROMS/5_tide/a_tpx09
-		scp -P 2022 coawst@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROMS/5_tide/a_tpx09/* .
+		scp -P xxxx coawst@xxx.xx.xxx.xx:/mnt-storage1/TRAINING/script/matlab/ROMS/5_tide/a_tpx09/* .
 
 	* buka matlab > create_tidal_forcing_TPXO91_sip.m
 
@@ -238,19 +238,19 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 6) Editing script: build_roms.sh / coawst.bash
 
 	* lokasi home directory, buat direktori baru untuk project sunda
-		/home/tr29/COAWST
+		/home/(user)/COAWST
 		cd Projects
 		mkdir sunda
 		cd sunda
 	* copy file bash dari root lalu edit
-		cp /home/tr29/COAWST/coawst.bash .
+		cp /home/(user)/COAWST/coawst.bash .
 		vi coawst.bash
 		:set number
 
 		++++++++++++++++++++++++++++++++++++++++++
 		124 export   COAWST_APPLICATION=ROMS_SUNDA
-		132 export   MY_ROOT_DIR=/home/tr29/COAWST
-		133 export   MY_PROJECT_DIR=/home/tr29/COAWST/Projects/sunda
+		132 export   MY_ROOT_DIR=/home/(user)/COAWST
+		133 export   MY_PROJECT_DIR=/home/(user)/COAWST/Projects/sunda
 		458 export   MY_HEADER_DIR=${MY_PROJECT_DIR}
     		459 export   MY_ANALYTICAL_DIR=${MY_PROJECT_DIR}
 		++++++++++++++++++++++++++++++++++++++++++
@@ -271,7 +271,7 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 
 		67        TITLE = ROMS STANDALONE - SUNDA
 		71     MyAppCPP = ROMS_SUNDA
-		76      VARNAME = /home/tr29/COAWST/ROMS/External/varinfo.dat
+		76      VARNAME = /home/(user)/COAWST/ROMS/External/varinfo.dat
      		94           Lm == 111            ! Number of I-direction INTERIOR RHO-points xi_rho-2
      		95           Mm == 105            ! Number of J-direction INTERIOR RHO-points eta_rho-2
      		96            N == 20            ! Number of vertical levels
@@ -289,11 +289,11 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
     		422       DSTART =  60196.5d0                      ! days
     		423   TIDE_START =  60196.5d0                      ! days
     		424     TIME_REF =  18581117.0d0                 ! yyyymmdd.dd
-    		963      GRDNAME == /home/tr29/COAWST/Projects/sunda/sunda_9km_gebco_grid.nc
-    		964      ININAME == /home/tr29/COAWST/Projects/sunda/roms_9km_ini.nc
-		1006      BRYNAME == /home/tr29/COAWST/Projects/sunda/roms_9km_bdy.nc
-		1030     TIDENAME == /home/tr29/COAWST/Projects/sunda/roms9km_tides.nc
-		1052      FRCNAME == /home/tr29/COAWST/Projects/sunda/roms_GFS_sunda_20230909_anl.nc         
+    		963      GRDNAME == /home/(user)/COAWST/Projects/sunda/sunda_9km_gebco_grid.nc
+    		964      ININAME == /home/(user)/COAWST/Projects/sunda/roms_9km_ini.nc
+		1006      BRYNAME == /home/(user)/COAWST/Projects/sunda/roms_9km_bdy.nc
+		1030     TIDENAME == /home/(user)/COAWST/Projects/sunda/roms9km_tides.nc
+		1052      FRCNAME == /home/(user)/COAWST/Projects/sunda/roms_GFS_sunda_20230909_anl.nc         
    		1072      RSTNAME == roms_sunda_rst.nc
    		1073      HISNAME == roms_sunda_his.nc
    		1078      AVGNAME == roms_sunda_avg.nc
@@ -302,9 +302,9 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 	* compile coawst.bash
 		script build.log
 		./coawst.bash -j 10
-		>> akan menghasilkan coawstM di /home/tr29/COAWST
-		>> lalu copy file coawstM ke /home/tr29/COAWST/Projects/sunda
-		cp coawstM /home/tr29/COAWST/Projects/sunda
+		>> akan menghasilkan coawstM di /home/(user)/COAWST
+		>> lalu copy file coawstM ke /home/(user)/COAWST/Projects/sunda
+		cp coawstM /home/(user)/COAWST/Projects/sunda
 		cp ../../coawstM .
 
 	* membuat run_roms
@@ -341,28 +341,28 @@ scp -r -P 2022 {username}@182.16.251.41:/mnt-storage1/TRAINING/script/matlab/ROM
 		cp -f /mnt-storage1/TRAINING/script/matlab/SWAN/swan* .
 		cp -f /mnt-storage1/TRAINING/script/matlab/WRF/* .
 
-	* buat file scrip_sunda_couple.in dan edit (/home/tr29/COAWST/Lib/SCRIP_COAWST)
-		cd /home/tr29/COAWST/Lib/SCRIP_COAWST
+	* buat file scrip_sunda_couple.in dan edit (/home/(user)/COAWST/Lib/SCRIP_COAWST)
+		cd /home/(user)/COAWST/Lib/SCRIP_COAWST
 		cp scrip_coawst_sandy.in scrip_sunda_couple.in
 		
 		vi scrip_sunda_couple.in
-		11 OUTPUT_NCFILE='/home/tr29/COAWST/Projects/sunda_couple/scrip_sunda_static.nc'
+		11 OUTPUT_NCFILE='/home/(user)/COAWST/Projects/sunda_couple/scrip_sunda_static.nc'
 	     	16 NGRIDS_ROMS=1,
 	     	17 NGRIDS_SWAN=1,
 	     	18 NGRIDS_WW3=0,
 	     	19 NGRIDS_WRF=1,
 	     	20 NGRIDS_HYD=0,
-     		24 ROMS_GRIDS(1)='/home/tr29/COAWST/Projects/sunda_couple/sunda_9km_gebco_grid.nc',
+     		24 ROMS_GRIDS(1)='/home/(user)/COAWST/Projects/sunda_couple/sunda_9km_gebco_grid.nc',
      		25 !ROMS_GRIDS(2)='../../Projects/Sandy/Sandy_roms_grid_ref3.nc',
-     		33 SWAN_COORD(1)='/home/tr29/COAWST/Projects/sunda_couple/swan_9km.grd',
+     		33 SWAN_COORD(1)='/home/(user)/COAWST/Projects/sunda_couple/swan_9km.grd',
      		34 !SWAN_COORD(2)='../../Projects/Sandy/Sandy_swan_coord_ref3.grd',
-     		35 SWAN_BATH(1)='/home/tr29/COAWST/Projects/sunda_couple/swan_9km.bot',
+     		35 SWAN_BATH(1)='/home/(user)/COAWST/Projects/sunda_couple/swan_9km.bot',
      		36 !SWAN_BATH(2)='../../Projects/Sandy/Sandy_swan_bathy_ref3.bot',
      		37 SWAN_NUMX(1)=113,
      		38 !SWAN_NUMX(2)=116,
      		39 SWAN_NUMY(1)=107,
      		40 !SWAN_NUMY(2)=86,
-     		58 WRF_GRIDS(1)='/home/tr29/COAWST/Projects/sunda_couple/wrfinput_d01',
+     		58 WRF_GRIDS(1)='/home/(user)/COAWST/Projects/sunda_couple/wrfinput_d01',
      		59 !WRF_GRIDS(2)='../../Projects/Sandy/wrfinput_d02',
 
 	* compile scrip_sunda_couple.in
